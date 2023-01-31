@@ -83,98 +83,98 @@ export default {
 </script>
 
  <style lang="scss">
- .e-checkbox {
-   --checkbox-size: 16px;
+.e-checkbox {
+  --checkbox-size: 16px;
 
-   @apply text-subhead3;
+  @apply text-subhead3;
 
-   position: relative;
-   display: inline-flex;
-   align-items: center;
-   color: var(--content-primary);
-   cursor: pointer;
-   user-select: none;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  color: var(--content-primary);
+  cursor: pointer;
+  user-select: none;
 
-   input {
-     width: var(--checkbox-size);
-     height: var(--checkbox-size);
-     border: 1px solid var(--border-button-secondary);
-     border-radius: var(--border-radius-xs);
-     box-shadow: none;
-     appearance: none;
+  input {
+    width: var(--checkbox-size);
+    height: var(--checkbox-size);
+    border: 1px solid var(--border-button-secondary);
+    border-radius: var(--border-radius-xs);
+    box-shadow: none;
+    appearance: none;
 
-     &:checked {
-       background-color: var(--background-status-active-bold);
-       border: none;
+    &:checked {
+      background-color: var(--background-status-active-bold);
+      border: none;
 
-       & + .e-checkbox__tick {
-         transform: scale(0.85) rotateZ(37deg);
-       }
-     }
-   }
+      & + .e-checkbox__tick {
+        transform: scale(0.85) rotateZ(37deg);
+      }
+    }
+  }
 
-   &__check {
-     @apply mr-8;
+  &__check {
+    @apply mr-8;
 
-     position: relative;
-     display: flex;
-     flex-shrink: 0;
-   }
+    position: relative;
+    display: flex;
+    flex-shrink: 0;
+  }
 
-   &__tick {
-     position: absolute;
-     top: 2px;
-     left: 0;
-     width: 7px;
-     height: 12px;
-     border: 2px solid var(--border-surface-forced-white);
-     border-top: none;
-     border-left: none;
-     transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-     transform: scale(0) rotateZ(37deg);
-     transform-origin: 135% 90%;
-   }
+  &__tick {
+    position: absolute;
+    top: 2px;
+    left: 0;
+    width: 7px;
+    height: 12px;
+    border: 2px solid var(--border-surface-forced-white);
+    border-top: none;
+    border-left: none;
+    transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform: scale(0) rotateZ(37deg);
+    transform-origin: 135% 90%;
+  }
 
-   &--reverse {
-     flex-direction: row-reverse;
+  &--reverse {
+    flex-direction: row-reverse;
 
-     .e-checkbox__check {
-       @apply mr-0 ml-8;
-     }
-   }
+    .e-checkbox__check {
+      @apply mr-0 ml-8;
+    }
+  }
 
-   &--disabled {
-     cursor: not-allowed;
-     opacity: 0.6;
+  &--disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
 
-     input[type="checkbox"] {
-       cursor: not-allowed;
-     }
-   }
+    input[type="checkbox"] {
+      cursor: not-allowed;
+    }
+  }
 
-   &--top {
-     align-items: flex-start;
+  &--top {
+    align-items: flex-start;
 
-     .e-checkbox__check {
-       @apply top-2;
-     }
-   }
+    .e-checkbox__check {
+      @apply top-2;
+    }
+  }
 
-   &--large {
-     --checkbox-size: 24px;
+  &--large {
+    --checkbox-size: 24px;
 
-     .e-checkbox__tick {
-       top: 5px;
-       left: 2px;
-       width: 9px;
-       height: 16px;
-     }
+    .e-checkbox__tick {
+      top: 5px;
+      left: 2px;
+      width: 9px;
+      height: 16px;
+    }
 
-     input:checked {
-       & + .e-checkbox__tick {
-         transform: scale(1) rotateZ(37deg);
-       }
-     }
-   }
- }
+    input:checked {
+      & + .e-checkbox__tick {
+        transform: scale(1) rotateZ(37deg);
+      }
+    }
+  }
+}
  </style>
