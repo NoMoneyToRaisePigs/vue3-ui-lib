@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+#below is a temporary fix for excessive output
+#https://github.com/okonet/lint-staged/issues/1145
+#https://github.com/okonet/lint-staged/issues/1164
+exec >/dev/tty 2>&1
+
+npx lint-staged
