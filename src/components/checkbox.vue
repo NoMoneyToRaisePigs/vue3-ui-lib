@@ -53,7 +53,7 @@ const props = withDefaults(defineProps<CheckboxProps>(), {
   size: 'medium',
 })
 
-const innerValue = ref<CheckBoxModelValue>(false)
+const innerValue = ref(false)
 
 const emit = defineEmits<{
   (event:UPDATE_MODEL_VALUE_TYPE, value: CheckBoxModelValue): void
