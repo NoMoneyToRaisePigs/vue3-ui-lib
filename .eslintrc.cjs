@@ -17,6 +17,8 @@ module.exports = {
     },
   },
   rules: {
+    // 'object-property-newline': 'error',
+    // 'object-curly-newline': ['error', 'always'],
     semi: [2, 'never'],
     indent: ['error', 2],
     'no-trailing-spaces': 'error',

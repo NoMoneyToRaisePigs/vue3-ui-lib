@@ -59,7 +59,6 @@ const emit = defineEmits<{
   (event:UPDATE_MODEL_VALUE_TYPE, value: CheckBoxModelValue): void
 }>()
 
-
 const classList = computed(() => {
   return [
     `e-checkbox--${props.size}`,

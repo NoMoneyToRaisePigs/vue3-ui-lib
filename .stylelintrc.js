@@ -1,3 +1,5 @@
+//TODO: GF - solve the tailwind @apply stylelint warnings.
+
 module.exports = {
    extends: [
       'stylelint-config-recommended-scss',
@@ -8,6 +10,13 @@ module.exports = {
    rules: {
       'indentation': [2, { baseIndentLevel: 0 }],
       'no-descending-specificity': null,
+      'at-rule-no-unknown': null,
+      'scss/at-rule-no-unknown': [
+        true,
+        {
+          ignoreAtRules: ['tailwind']
+        }
+      ],
    }
 }
 
