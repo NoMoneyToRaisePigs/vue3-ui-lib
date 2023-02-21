@@ -29,6 +29,7 @@ import Checkbox from './components/checkbox.vue'
       >
     </a>
   </div>
+  <h2>Now Test out git actions</h2>
   <HelloWorld msg="Vite + Vue" />
 </template>
 
