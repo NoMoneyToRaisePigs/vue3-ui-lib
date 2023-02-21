@@ -11,17 +11,29 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Checkout
     - uses: actions/checkout@v3
 
     - name: Use Node.js 18
       uses: actions/setup-node@v3
       with:
         node-version: 18
-    - name: install Yarn
-      run: |
-        npm install --global yarn
-    - name: Build
+
+    - name: Install Dependencies
       run: |
         yarn install
+
+    - name: Build vue3-ui-lib
+      run: |
         yarn run build
+
+    - name: Docker build and push
+      uses: mr-smithers-excellent/docker-build-push@v5
+      with:
+        image: gf1103/vue3-ui-lib
+        tags: latest
+        registry: docker.io
+        dockerfile: Dockerfile
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
   
