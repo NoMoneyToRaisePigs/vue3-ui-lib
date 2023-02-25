@@ -1,11 +1,14 @@
 <template>
   <div style="padding: 24px;">
-    componentWrapper.vue
+    <RouterView />
   </div>
 </template>
 
 <script lang="ts" setup>
 import { onMounted } from 'vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 function isJsonString (str: string) {
   if (typeof str === 'string') {
@@ -27,6 +30,7 @@ onMounted(() => {
 
   // router.push(fullPath)
   window.addEventListener('message', handleMessage, false)
+  router.push('Example')
 })
 
 function handleMessage (event: MessageEvent) {
@@ -39,6 +43,7 @@ function handleMessage (event: MessageEvent) {
 
   console.log(data)
 
+  router.push(data)
   // if (isJsonString(data)) {
   //   const { source, location } = JSON.parse(data)
 

@@ -8,14 +8,14 @@
         {{ menu.title }}
       </div>
       <div class="section-items">
-        <div
+        <RouterLink
           v-for="item of menu.items"
           :key="item.title"
           :to="item.link"
           @click="handleClick(item)"
         >
           {{ item.title }}
-        </div>
+        </RouterLink>
         <!-- <RouterLink
           v-for="item of menu.items"
           :key="item.title"

@@ -1,0 +1,26 @@
+:root {
+  /* Semantic Spacings */
+  --space-xxxxs: 2px;
+  --space-xxxs: 4px;
+  --space-xxs: 8px;
+  --space-xs: 12px;
+  --space-sm: 16px;
+  --space-md: 24px;
+  --space-lg: 32px;
+  --space-xl: 40px;
+  --space-xxl: 48px;
+  --space-xxxl: 80px;
+
+  @include breakpoint-down (md) {
+    --space-xxxxs: 2px;
+    --space-xxxs: 4px;
+    --space-xxs: 8px;
+    --space-xs: 12px;
+    --space-sm: 16px;
+    --space-md: 16px;
+    --space-lg: 24px;
+    --space-xl: 32px;
+    --space-xxl: 40px;
+    --space-xxxl: 64px;
+  }
+}

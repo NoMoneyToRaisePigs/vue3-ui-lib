@@ -23,6 +23,7 @@ module.exports = {
     indent: ['error', 2],
     'no-trailing-spaces': 'error',
     'comma-dangle': ['error', 'always-multiline'],
+    'object-curly-spacing': ['error', 'always'],
     quotes: ['error', 'single'],
     '@typescript-eslint/indent': ['error', 2],
     'vue/max-attributes-per-line': ['error', {

@@ -27,7 +27,8 @@ const info = ref('aside + content')
 const iframe = ref()
 
 const handleComponentNavigation = (data: any) => {
-  iframe.value.contentWindow.postMessage(JSON.stringify(data))
+  // iframe.value.contentWindow.postMessage(JSON.stringify(data))
+  iframe.value.contentWindow.postMessage('Checkbox')
 }
 
 </script>
