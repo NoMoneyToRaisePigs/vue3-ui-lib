@@ -4,8 +4,14 @@ import routes from './router'
 import App from './App.vue'
 
 import './styles/reset.scss'
+import { install } from './utils/install'
 
-createApp(App)
+
+const app = createApp(App)
+
+install(app)
+
+app
   .use(routes)
   .mount('#app')
 
