@@ -41,6 +41,9 @@ module.exports = {
     'vue/no-multiple-template-root': 'off',
     'vue/multi-word-component-names': 'off',
   },
+  ignorePatterns: [
+    '**/prism.js',
+  ],
 }
 
 

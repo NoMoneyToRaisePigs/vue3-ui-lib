@@ -1,13 +1,14 @@
 <template>
   <div>
-    {{ info }}
-    <ECheckbox>I'm a checkbox</ECheckbox>
+    <ECheckbox />
+    <CheckboxBasic />
   </div>
 </template>
 
 <script lang="ts" setup>
 // import { Checkbox } from '@/components'
 import { ref } from 'vue'
+import CheckboxBasic from './checkbox-basic.vue'
 
 const info = ref('page: checkbox')
 
