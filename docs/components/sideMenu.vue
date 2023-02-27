@@ -50,13 +50,12 @@ const componentsUrl = function () {
 
   Object.keys(modules).forEach((name) => {
     const modulesName = name
-      //.replace(/(.*\/)*([^.]+).*/ig, '$1')
       .replace('../pages/', '')
-      .replace('/story/', '')
-      .replace('/components/', '')
-      .replaceAll('/', '')
+      .replaceAll('/index.vue', '')
 
-    if (modulesName !== '' && !excludeModules.includes(modulesName)) pageComponents.add(modulesName)
+
+    if (modulesName !== '' && !excludeModules.includes(modulesName))
+      pageComponents.add(modulesName)
   })
 
   const list: AsideItem[] = []
