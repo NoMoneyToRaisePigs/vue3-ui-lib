@@ -19,45 +19,33 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 
-//  import { UPDATE_MODEL_VALUE, UPDATE_MODEL_VALUE_TYPE } from '@/constants/events'
+import type { CheckBoxModelValue, CheckboxProps } from './type'
+import { UPDATE_MODEL_VALUE } from 'constants/events'
+import type { UPDATE_MODEL_VALUE_TYPE } from 'constants/events'
 
-//  import type { CheckboxProps, CheckBoxModelValue } from '@/types/Checkbox'
 
-export type CheckBoxSize = 'medium' | 'large'
-export type CheckBoxModelValue = boolean
-export interface CheckboxProps {
-  modelValue?: CheckBoxModelValue
-  value?: number | string
-  text?: string
-  name?: string
-  disabled?: boolean
-  reverse?: boolean
-  top?: boolean
-  size?: CheckBoxSize
-  validateEvent?: boolean
+//TODO-GF: WTF, empty interface reuslt in a compiling issue, and vite-plugin-vue-type-imports cause the source map issue !!!
+interface Prop extends CheckboxProps {
+  ignore: string
 }
 
-export interface CheckboxItem extends CheckboxProps {
-  checked: boolean
-}
-
-export type UPDATE_MODEL_VALUE_TYPE = 'update:modelValue' | 'update:model-value'
-
-const UPDATE_MODEL_VALUE = 'update:modelValue'
-
-const props = withDefaults(defineProps<CheckboxProps>(), {
-  modelValue: false,
-  validateEvent: true,
+const props = withDefaults(defineProps<Prop>(), {
   size: 'medium',
 })
-
-const innerValue = ref(false)
 
 const emit = defineEmits<{
   (event:UPDATE_MODEL_VALUE_TYPE, value: CheckBoxModelValue): void
 }>()
+
+// const { modelValue } = toRefs(props)
+
+const innerValue = ref(props.modelValue ?? false)
+watch(() => props.modelValue, (val) => {
+  innerValue.value = val ?? false
+})
+
 
 const classList = computed(() => {
   return [
@@ -71,10 +59,11 @@ const classList = computed(() => {
 })
 
 
-function toggle () {
-  emit(UPDATE_MODEL_VALUE, props.modelValue)
+function toggle() {
+  emit(UPDATE_MODEL_VALUE, innerValue.value)
 }
 </script>
+
 <script lang="ts">
 export default {
   name: 'ECheckbox',

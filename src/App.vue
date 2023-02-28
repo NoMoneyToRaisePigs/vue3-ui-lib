@@ -1,11 +1,28 @@
-<script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
-import Checkbox from './components/checkbox.vue'
-</script>
-
 <template>
   <div>
-    <Checkbox>Test</Checkbox>
+    <button @click="change">
+      xxx
+    </button>
+    <Checkbox v-model="arrayVal" name="apple" value="1">
+      Apple
+    </Checkbox>
+    <Checkbox v-model="arrayVal" name="pear" value="2">
+      Pear
+    </Checkbox>
+    <Checkbox v-model="arrayVal" name="banana" value="3">
+      Banana
+    </Checkbox>
+    <pre>
+      {{ arrayVal }}
+    </pre>
+  </div>
+  <div>
+    <Checkbox v-model="isVIP" name="isVp">
+      isVIP
+    </Checkbox>
+    <pre>
+      {{ isVIP }}
+    </pre>
   </div>
   <div>
     <a
@@ -30,8 +47,19 @@ import Checkbox from './components/checkbox.vue'
     </a>
   </div>
   <h2>Now Test out git actions</h2>
-  <HelloWorld msg="Vite + Vue" />
 </template>
+
+<script setup lang="ts">
+import { ref } from 'vue'
+import { Checkbox } from './components/index'
+
+const arrayVal = ref(['1'])
+const isVIP = ref(true)
+
+function change() {
+  arrayVal.value = ['1', '2']
+}
+</script>
 
 <style scoped>
 .logo {

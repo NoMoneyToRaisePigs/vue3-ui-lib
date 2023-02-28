@@ -1,5 +1,7 @@
 export type CheckBoxSize = 'medium' | 'large'
-export type CheckBoxModelValue = boolean
+
+export type CheckBoxModelValue = boolean | (string | number)[]
+
 export interface CheckboxProps {
   modelValue?: CheckBoxModelValue
   value?: number | string
@@ -9,7 +11,6 @@ export interface CheckboxProps {
   reverse?: boolean
   top?: boolean
   size?: CheckBoxSize
-  validateEvent?: boolean
 }
 
 export interface CheckboxItem extends CheckboxProps {

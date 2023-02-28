@@ -26,6 +26,12 @@ module.exports = {
     'object-curly-spacing': ['error', 'always'],
     quotes: ['error', 'single'],
     '@typescript-eslint/indent': ['error', 2],
+    '@typescript-eslint/no-empty-interface': [
+      'error',
+      {
+        'allowSingleExtends': true,
+      },
+    ],
     'vue/max-attributes-per-line': ['error', {
       'singleline': {
         'max': 4,
@@ -40,6 +46,12 @@ module.exports = {
     }],
     'vue/no-multiple-template-root': 'off',
     'vue/multi-word-component-names': 'off',
+    'vue/define-macros-order': ['error', {
+      'order': ['defineProps', 'defineEmits'],
+    }],
+    'vue/component-tags-order': ['error', {
+      'order': [ 'template', 'script', 'style' ],
+    }],
   },
   ignorePatterns: [
     '**/prism.js',
