@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "scripts": {
     "doc": "cd docs && vite",
+    "build:doc": "cd docs && vite build",
     "dev": "vite",
     "build": "vue-tsc && vite build",
     "preview": "vite preview",

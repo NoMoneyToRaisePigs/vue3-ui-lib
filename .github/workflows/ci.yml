@@ -25,7 +25,7 @@ jobs:
 
     - name: Build vue3-ui-lib
       run: |
-        yarn run build
+        yarn run build:doc
 
     - name: Docker build and push
       uses: mr-smithers-excellent/docker-build-push@v5
