@@ -1,5 +1,9 @@
 <template>
   <div>
+    <Loading />
+    <Loading :color="'red'" :stroke-width="30" :size="40" />
+  </div>
+  <div>
     <button @click="change">
       xxx
     </button>
@@ -52,6 +56,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { Checkbox } from './components/index'
+import { Loading } from './components/index'
 
 const arrayVal = ref(['1'])
 const isVIP = ref(true)

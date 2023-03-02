@@ -28,7 +28,7 @@ import type { UPDATE_MODEL_VALUE_TYPE } from 'constants/events'
 
 //TODO-GF: WTF, empty interface reuslt in a compiling issue, and vite-plugin-vue-type-imports cause the source map issue !!!
 interface Prop extends CheckboxProps {
-  ignore: string
+  ignore?: string
 }
 
 const props = withDefaults(defineProps<Prop>(), {
