@@ -1,5 +1,11 @@
 <template>
   <div>
+    <XInput v-model="inputVal" />
+    <pre>
+      {{ inputVal }}
+    </pre>
+  </div>
+  <div>
     <Loading />
     <Loading :color="'red'" :stroke-width="30" :size="40" />
   </div>
@@ -57,9 +63,12 @@
 import { ref } from 'vue'
 import { Checkbox } from './components/index'
 import { Loading } from './components/index'
+import { XInput } from './components/index'
 
 const arrayVal = ref(['1'])
 const isVIP = ref(true)
+
+const inputVal = ref('')
 
 function change() {
   arrayVal.value = ['1', '2']
