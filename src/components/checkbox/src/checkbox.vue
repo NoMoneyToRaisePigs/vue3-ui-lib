@@ -1,9 +1,9 @@
 <template>
   <label
-    class="e-checkbox"
+    class="fun-checkbox"
     :class="classList"
   >
-    <span class="e-checkbox__check">
+    <span class="fun-checkbox__check">
       <input
         v-model="innerValue"
         type="checkbox"
@@ -12,9 +12,9 @@
         :disabled="disabled"
         @change="toggle"
       >
-      <span class="e-checkbox__tick" />
+      <span class="fun-checkbox__tick" />
     </span>
-    <span class="e-checkbox__text"><slot>{{ text }}</slot></span>
+    <span class="fun-checkbox__text"><slot>{{ text }}</slot></span>
   </label>
 </template>
 
@@ -49,11 +49,11 @@ watch(() => props.modelValue, (val) => {
 
 const classList = computed(() => {
   return [
-    `e-checkbox--${props.size}`,
+    `fun-checkbox--${props.size}`,
     {
-      'e-checkbox--reverse': props.reverse,
-      'e-checkbox--disabled': props.disabled,
-      'e-checkbox--top': props.top,
+      'fun-checkbox--reverse': props.reverse,
+      'fun-checkbox--disabled': props.disabled,
+      'fun-checkbox--top': props.top,
     },
   ]
 })
@@ -71,7 +71,7 @@ export default {
 </script>
 
  <style lang="scss">
-.e-checkbox {
+.fun-checkbox {
   --checkbox-size: 16px;
 
   @apply text-subhead3;
@@ -95,7 +95,7 @@ export default {
       background-color: var(--background-status-active-bold);
       border: none;
 
-      & + .e-checkbox__tick {
+      & + .fun-checkbox__tick {
         transform: scale(0.85) rotateZ(37deg);
       }
     }
@@ -126,7 +126,7 @@ export default {
   &--reverse {
     flex-direction: row-reverse;
 
-    .e-checkbox__check {
+    .fun-checkbox__check {
       @apply mr-0 ml-8;
     }
   }
@@ -143,7 +143,7 @@ export default {
   &--top {
     align-items: flex-start;
 
-    .e-checkbox__check {
+    .fun-checkbox__check {
       @apply top-2;
     }
   }
@@ -151,7 +151,7 @@ export default {
   &--large {
     --checkbox-size: 24px;
 
-    .e-checkbox__tick {
+    .fun-checkbox__tick {
       top: 5px;
       left: 2px;
       width: 9px;
@@ -159,7 +159,7 @@ export default {
     }
 
     input:checked {
-      & + .e-checkbox__tick {
+      & + .fun-checkbox__tick {
         transform: scale(1) rotateZ(37deg);
       }
     }
