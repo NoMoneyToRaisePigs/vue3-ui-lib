@@ -1,5 +1,12 @@
 <template>
   <div>
+    <p>buy a lot price: {{ BuyAlot }}</p>
+    <p>{{ internalPrice }}</p>
+    <button @click="chagneSalesPrice">
+      change sales price
+    </button>
+  </div>
+  <div>
     <XInput v-model="inputVal" />
     <pre>
       {{ inputVal }}
@@ -60,7 +67,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, reactive, computed } from 'vue'
 import { Checkbox } from './components/index'
 import { Loading } from './components/index'
 import { XInput } from './components/index'
@@ -69,6 +76,27 @@ const arrayVal = ref(['1'])
 const isVIP = ref(true)
 
 const inputVal = ref('')
+
+const product = reactive({
+  price: {
+    sale: 9,
+    single: 10,
+  },
+  storage: 10,
+})
+
+
+const salesPrice = computed(() => {
+  return product.price.single * 0.8
+})
+
+const BuyAlot = computed(() => {
+  return salesPrice.value * product.storage
+})
+
+function chagneSalesPrice() {
+  product.price.sale = 8
+}
 
 function change() {
   arrayVal.value = ['1', '2']
