@@ -1,23 +1,21 @@
-import { ref, computed, Ref } from 'vue'
-import { useElementBounding } from '@vueuse/core'
+import { ref, computed, Ref, StyleValue } from 'vue'
+import { useElementBounding, useWindowSize } from '@vueuse/core'
+import type { Placement, PopperPosition } from './type'
 
-type PlacementMain = 'top' | 'bottom' | 'left' | 'rigt'
-type PlacementSub = 'start' | 'end'
+// function usePlacement(triggerEl: Ref<HTMLDivElement | null>, contentEl: Ref<HTMLDivElement | null>, placement: Ref<Placement>, offset: Ref<number>) {
 
-type PlacementTop = 'top' | 'top-start' | 'top-end'
-type PlacementBottom = 'bottom' | 'bottom-start' | 'bottom-end'
-type PlacementLeft = 'left' | 'left-start' | 'left-end'
-type PlacementRight = 'right' | 'right-start' | 'right-end'
-type Placement = 'auto' | PlacementTop | PlacementBottom | PlacementLeft | PlacementRight
+//   if (placement.value === 'auto') {
+//     const { top: triggerTop, right: triggerRight, bottom: triggerBottom, left: triggerLeft, width: triggerWidth, height: triggerHeight } = useElementBounding(triggerEl)
+//     const { top: contentTop, right: contentRight, bottom: contentBottom, left: contentLeft, width: contentWidth, height: contentHeight } = useElementBounding(contentEl)
 
-interface PopperPosition {
-  top: number
-  left: number
-}
-
-function usePlacement(placement: Ref<Placement>) {
-  return null
-}
+//     if (triggerTop >= triggerBottom) {
+//       return 'top'
+//     } else {
+//       return 'bottom'
+//     }
+//   }
+//   return null
+// }
 
 // function getPosition(teleport: boolean, placement: Placement, offset: number) {
 //   const placementSections = placement.split('-')
@@ -37,23 +35,27 @@ function usePlacement(placement: Ref<Placement>) {
 
 // }
 
-export function usePopperPosition(triggerEl: Ref<HTMLDivElement | null>, contentEl: Ref<HTMLDivElement | null>, teleport: Ref<boolean> | boolean, placement: Ref<Placement> | Placement = 'auto', offset: Ref<number> | number = 0) : Ref<PopperPosition>{
+export function usePopperPosition (triggerEl: Ref<HTMLDivElement | null>, contentEl: Ref<HTMLDivElement | null>, teleport: Ref<boolean> | boolean, placement: Ref<Placement> | Placement = 'auto', offset: Ref<number> | number = 0) : Ref<PopperPosition>{
 
   const placementRef = ref(placement)
   const offsetRef = ref(offset)
   const teleportRef = ref(teleport)
 
-  const { top: triggerTop, right: triggerRight, bottom: triggerBottom, left: triggerLeft, width: triggerWidth, height: triggerHeight } = useElementBounding(triggerEl)
-  const { top: contentTop, right: contentRight, bottom: contentBottom, left: contentLeft, width: contentWidth, height: contentHeight } = useElementBounding(contentEl)
-
+  const { top: triggerTop,  bottom: triggerBottom, left: triggerLeft, width: triggerWidth, height: triggerHeight } = useElementBounding(triggerEl)
+  const { width: contentWidth, height: contentHeight } = useElementBounding(contentEl)
+  const { height: windowHeight } = useWindowSize()
 
   const position = computed<PopperPosition>(() => {
     let top = Number.MIN_SAFE_INTEGER
     let left = Number.MIN_SAFE_INTEGER
 
     const placementSections = placementRef.value.split('-')
-    const main = placementSections[0]
+    let main = placementSections[0]
     const sub = placementSections[1]
+
+    if (main === 'auto') {
+      main = triggerTop.value > windowHeight.value - triggerBottom.value ? 'top' : 'bottom'
+    }
 
     if (teleportRef.value) {
       if (main === 'top' || main === 'bottom') {
@@ -68,7 +70,7 @@ export function usePopperPosition(triggerEl: Ref<HTMLDivElement | null>, content
         } else if (sub === 'end') {
           left = triggerLeft.value + triggerWidth.value - contentWidth.value
         } else {
-          left = triggerLeft.value + triggerWidth.value / 2 - contentWidth.value / 2
+          left = Math.max(0, triggerLeft.value + triggerWidth.value / 2 - contentWidth.value / 2)
         }
       } else if (main === 'left' || main === 'right') {
         if (main === 'left') {
@@ -82,13 +84,8 @@ export function usePopperPosition(triggerEl: Ref<HTMLDivElement | null>, content
         } else if (sub === 'end') {
           top = triggerTop.value + triggerHeight.value - contentHeight.value
         } else {
-          top = triggerTop.value + triggerHeight.value / 2 - contentHeight.value / 2
+          top = Math.max(0, triggerTop.value + triggerHeight.value / 2 - contentHeight.value / 2)
         }
-      } else {
-        //auto
-        // should set auto first by checking the top left bottom right
-        left = 0
-        left = 0
       }
     } else {
       if (main === 'top' || main === 'bottom') {
@@ -119,11 +116,6 @@ export function usePopperPosition(triggerEl: Ref<HTMLDivElement | null>, content
         } else {
           top = triggerHeight.value / 2 - contentHeight.value / 2
         }
-      } else {
-        //auto
-        // should set auto first by checking the top left bottom right
-        left = 0
-        left = 0
       }
     }
 
@@ -135,4 +127,17 @@ export function usePopperPosition(triggerEl: Ref<HTMLDivElement | null>, content
   })
 
   return position
+}
+
+export function useContentStyle(triggerEl: Ref<HTMLDivElement | null>, contentEl: Ref<HTMLDivElement | null>, teleport: Ref<boolean> | boolean, placement: Ref<Placement> | Placement = 'auto', offset: Ref<number> | number = 0) {
+  const contentPosition = usePopperPosition(triggerEl, contentEl, teleport, placement, offset)
+
+  const contentStyle = computed<StyleValue>(() => {
+    return {
+      top: `${contentPosition.value.top}px`,
+      left: `${contentPosition.value.left}px`,
+    }
+  })
+
+  return contentStyle
 }
