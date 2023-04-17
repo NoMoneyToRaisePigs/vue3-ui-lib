@@ -1,5 +1,5 @@
 <template>
-  <svg class="e-spinner" :style="spinnerStyle" viewBox="0 0 50 50">
+  <svg class="fun-spinner" :style="spinnerStyle" viewBox="0 0 50 50">
     <circle
       class="path"
       cx="25"
@@ -52,7 +52,7 @@ export default {
 </script>
 
 <style lang="scss">
-.e-spinner {
+.fun-spinner {
   --spinner-color: var(--color-primary);
 
   width: 16px;
