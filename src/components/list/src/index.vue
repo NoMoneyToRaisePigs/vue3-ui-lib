@@ -2,8 +2,8 @@
   <div ref="wrapper" class="fun-virtual-list-wrapper">
     <div class="fake" style="width: 2px" :style="fakeStyle" />
     <div :style="listStyle">
-      <div v-for="item in visibleItems" :key="item" style="width: 200px;">
-        {{ item }}
+      <div v-for="item in visibleItems" :key="item.index" style="width: 200px;">
+        <slot :item="item" />
       </div>
     </div>
   </div>
@@ -13,22 +13,35 @@
 import { ref, computed, toRefs, StyleValue  } from 'vue'
 import { useScroll, useElementSize } from '@vueuse/core'
 
-interface Props {
-  items: string[]
-  itemHeight: number
-  itemCount: number
-  buffer: number
+export interface virtualItem {
+  index: number
+  [key: string]: unknown
 }
 
-const props = defineProps<Props>()
 
-const { itemHeight, itemCount, buffer, items } = toRefs(props)
+interface Props<T extends virtualItem = virtualItem> {
+  items: T[]
+  itemHeight: number
+  buffer?: number
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  buffer: 2,
+})
+
+const { itemHeight, buffer, items } = toRefs(props)
 
 const wrapper = ref()
 const { y: scrollTop } = useScroll(wrapper)
 const { height: containerHeight } = useElementSize(wrapper)
 
+const indexedItem = computed(() => {
+  return items.value.map((item, index) => ({ ...item, index }))
+})
 
+const itemCount = computed(() => {
+  return items.value.length
+})
 
 const totalHeight = computed(() => {
   return itemCount.value * itemHeight.value

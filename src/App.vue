@@ -1,10 +1,10 @@
 <template>
   <div>
-    <p>buy a lot price: {{ BuyAlot }}</p>
-    <p>{{ internalPrice }}</p>
-    <button @click="chagneSalesPrice">
-      change sales price
-    </button>
+    <FunList :items="items" :item-height="itemHeight" :buffer="buffer">
+      <template #default="{ item }">
+        <p>{{ item.name }} + {{ item.value }}</p>
+      </template>
+    </FunList>
   </div>
   <div>
     <XInput v-model="inputVal" />
@@ -41,29 +41,6 @@
       {{ isVIP }}
     </pre>
   </div>
-  <div>
-    <a
-      href="https://vitejs.dev"
-      target="_blank"
-    >
-      <img
-        src="/vite.svg"
-        class="logo"
-        alt="Vite logo"
-      >
-    </a>
-    <a
-      href="https://vuejs.org/"
-      target="_blank"
-    >
-      <img
-        src="./assets/vue.svg"
-        class="logo vue"
-        alt="Vue logo"
-      >
-    </a>
-  </div>
-  <h2>Now Test out git actions</h2>
 </template>
 
 <script setup lang="ts">
@@ -71,36 +48,36 @@ import { ref, reactive, computed } from 'vue'
 import { Checkbox } from './components/index'
 import { Loading } from './components/index'
 import { XInput } from './components/index'
+import { FunList } from './components/index'
+import { virtualItem } from './components/list/src/index.vue'
+
+interface MyItem extends virtualItem {
+  name: string,
+  value: string,
+}
 
 const arrayVal = ref(['1'])
 const isVIP = ref(true)
 
 const inputVal = ref('')
 
-const product = reactive({
-  price: {
-    sale: 9,
-    single: 10,
-  },
-  storage: 10,
-})
-
-
-const salesPrice = computed(() => {
-  return product.price.single * 0.8
-})
-
-const BuyAlot = computed(() => {
-  return salesPrice.value * product.storage
-})
-
-function chagneSalesPrice() {
-  product.price.sale = 8
-}
 
 function change() {
   arrayVal.value = ['1', '2']
 }
+
+const items: virtualItem[] = []
+
+for (let i = 0; i < 1000; i++) {
+  items.push({
+    index: i,
+    name: `name${i}`,
+    value: `value${i}`,
+  })
+}
+
+const buffer = 2
+const itemHeight = 20
 </script>
 
 <style scoped>
