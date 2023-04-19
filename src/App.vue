@@ -1,6 +1,6 @@
 <template>
   <div>
-    <FunList :items="items" :item-height="itemHeight" :buffer="buffer">
+    <FunList :items="items" :item-height="itemHeight" :buffer="buffer" :get-height="getHeight">
       <template #default="{ item }">
         <p>{{ item.name }} + {{ item.value }}</p>
       </template>
@@ -74,6 +74,10 @@ for (let i = 0; i < 1000; i++) {
     name: `name${i}`,
     value: `value${i}`,
   })
+}
+
+const getHeight = (i: number) => {
+  return i % 2 ? 20 : 40
 }
 
 const buffer = 2
