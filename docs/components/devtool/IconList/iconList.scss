@@ -1,0 +1,36 @@
+.demo-icon-list {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  padding: 0;
+  overflow: hidden;
+  list-style: none;
+  background-color: var(--color-white);
+  border-top: 1px solid #dcdfe6;
+  border-left: 1px solid #dcdfe6;
+  border-radius: 4px;
+
+  .icon-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 90px;
+    font-size: 13px;
+    color: var(--text-primary);
+    text-align: center;
+    border-right: 1px solid #dcdfe6;
+    border-bottom: 1px solid #dcdfe6;
+  }
+
+  .demo-svg-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    cursor: pointer;
+
+    .icon-name {
+      margin-top: 8px;
+    }
+  }
+}
